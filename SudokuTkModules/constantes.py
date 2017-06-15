@@ -37,7 +37,7 @@ PL = platform[0]
 APP_NAME = "Sudoku-Tk"
 
 # local directory
-PATH = os.path.dirname(__file__)
+PATH = os.path.split(__file__)[0]
 
 LOCALE_PATH = os.path.join(PATH, 'locale')
 
