@@ -29,10 +29,8 @@ from webbrowser import open as webOpen
 
 
 class Aide(Toplevel):
-    """ Toplevel de l'application principale donnant les informations à
-        propos du logiciel """
     def __init__(self, master, **options):
-        """ créer le Toplevel 'À propos de Sudoku-Tk' """
+        
         Toplevel.__init__(self, master, **options)
 
         self.title(_("Sudoku-Tk Help"))
@@ -93,7 +91,6 @@ class Aide(Toplevel):
         self.wait_window(self)
 
     def _quitter(self):
-        """ ferme la fenêtre """
         if self.master:
             self.master.focus_set()
         self.destroy()

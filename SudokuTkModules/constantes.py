@@ -143,7 +143,6 @@ else:
         return PhotoImage(file=file, master=master)
 
 def set_icon(fen):
-    """ icône de l'application """
     if PL == 'w':
         fen.iconbitmap(ICONE_WIN, ICONE_WIN)
     else:

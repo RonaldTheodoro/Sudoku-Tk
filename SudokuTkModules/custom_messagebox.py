@@ -25,8 +25,7 @@ from tkinter import Toplevel, BooleanVar
 from tkinter.ttk import Label, Button, Checkbutton
 
 class OneButtonBox(Toplevel):
-    """ Messagebox with only one button """
-
+    
     def __init__(self, parent=None, title="", message="", button="Ok", image=None, **options):
         """
             Create a message box with one button:
@@ -90,8 +89,7 @@ class OBCheckbutton(Toplevel):
         return self.var.get()
 
 class TwoButtonBox(Toplevel):
-    """ Messagebox with two buttons """
-
+    
     def __init__(self, parent=None, title="", message="", button1="Yes", button2="No",
                  image=None, **options):
         """
@@ -143,18 +141,15 @@ class TwoButtonBox(Toplevel):
 
 def one_button_box(parent=None, title="", message="", button="Ok", image=None,
                    **options):
-    """ Open a OneButtonBox and return "ok" when closed. """
     OneButtonBox(parent, title, message, button, image, **options)
     return "ok"
 
 def ob_checkbutton(parent=None, title="", message="", button="Ok", image=None,
                    checkmessage="", **options):
-    """ Open a OBCheckbutton and return the value of the checkbutton when closed. """
     ob = OBCheckbutton(parent, title, message, button, image, checkmessage, **options)
     return ob.get_check()
 
 def two_button_box(parent=None, title="", message="", button1="Yes", button2="No",
                    image=None, **options):
-    """ Open a TwoButtonBox and return the text of the button chosen by the user"""
     tbb = TwoButtonBox(parent, title, message, button1, button2, image, **options)
     return tbb.get_rep()

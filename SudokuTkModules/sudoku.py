@@ -181,9 +181,7 @@ class Sudoku(Tk):
         self.mainloop()
 
     def show_stat(self):
-        """ show best times """
         def reset():
-            """ reset best times """
             for level in ["easy", "medium", "difficult"]:
                 CONFIG.set("Statistics", level, "")
             top.destroy()
@@ -236,14 +234,12 @@ class Sudoku(Tk):
         self.level = "difficult"
 
     def translate(self):
-        """ changement de la langue de l'interface """
         one_button_box(self, _("Information"),
                        _("The language setting will take effect after restarting the application"),
                        image=self.im_info)
         CONFIG.set("General", "language", self.langue.get())
 
     def focus_out(self, event):
-        """ met en pause si la fenêtre n'est plus au premier plan """
         try:
             if not self.focus_get() and self.chrono_on:
                 self.play_pause()
@@ -253,7 +249,6 @@ class Sudoku(Tk):
                 self.play_pause()
 
     def log_reinit(self):
-        """ réinitialise le fichier log (ie efface l'historique des actions) """
         with open(LOG, "w") as log:
             log.write("# Sudoku logfile\n\n")
         self.log_ligne = 1  # ligne actuelle dans le fichier log (pour undo)
@@ -262,7 +257,6 @@ class Sudoku(Tk):
         self.b_redo.configure(state="disabled")
 
     def log(self):
-        """ annule la possibilté de faire redo une fois qu'on a remodifié la grille. """
         self.log_nb_ligne += 1
         self.log_ligne += 1
         self.b_undo.configure(state="normal")
@@ -362,7 +356,6 @@ class Sudoku(Tk):
 
 
     def restart(self, m=0, s=0):
-        """ réinitialise le chrono et les boutons """
         self.chrono = [m, s]
         self.chrono_on = False
         self.debut = False
@@ -374,7 +367,6 @@ class Sudoku(Tk):
         self.log_reinit()
 
     def play_pause(self):
-        """ Démarre le chrono s'il était arrêté, le met en pause sinon """
         if self.debut:
             if self.chrono_on:
                 self.chrono_on = False
@@ -392,7 +384,6 @@ class Sudoku(Tk):
 
 
     def affiche_chrono(self):
-        """ Met à jour l'affichage du temps """
         if self.chrono_on:
             self.chrono[1] += 1
             if self.chrono[1] == 60:
@@ -481,7 +472,6 @@ class Sudoku(Tk):
             self.blocs[i][j].affiche_erreur_possibilite(val)
 
     def test_remplie(self):
-        """ Test si la grille est remplie """
         if self.nb_cases_remplies == 81:
             grille = Grille()
             for i in range(9):
@@ -562,7 +552,6 @@ class Sudoku(Tk):
 
 
     def genere_grille(self):
-        """ Génère une nouvelle grille """
         if self.chrono_on:
             self.play_pause()
         rep = _("Yes")
@@ -631,7 +620,6 @@ class Sudoku(Tk):
                 p.dump(self.level)
 
     def affiche_grille(self, grille):
-        """ Affiche la grille """
         self.nb_cases_remplies = 0
         self.restart()
         for i in range(9):
@@ -646,7 +634,6 @@ class Sudoku(Tk):
                    self.blocs[i][j].set_modifiable(True)
 
     def import_partie(self):
-        """ importe une partie stockée dans un fichier .sudoku """
         if self.chrono_on:
             self.play_pause()
         rep = _("Yes")
@@ -687,7 +674,6 @@ class Sudoku(Tk):
 
 
     def resolution_init(self):
-        """ Résolution de la grille initiale (sans tenir compte des valeurs rentrées par l'utilisateur. """
         grille = Grille()
         for i in range(9):
             for j in range(9):
@@ -803,7 +789,6 @@ class Sudoku(Tk):
                                    image=self.im_erreur)
 
     def export_impression(self):
-        """ exporte la grille en image (pour pouvoir l'imprimer) """
         if self.chrono_on:
             self.play_pause()
         fichier = asksaveasfilename(title=_("Export"),

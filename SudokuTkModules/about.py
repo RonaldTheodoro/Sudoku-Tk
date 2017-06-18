@@ -30,7 +30,6 @@ class About(Toplevel):
     """ Toplevel de l'application principale donnant les informations à
         propos du logiciel """
     def __init__(self, master, **options):
-        """ créer le Toplevel 'À propos de Sudoku-Tk' """
         Toplevel.__init__(self, master, **options)
 
         self.title(_("About Sudoku-Tk"))
@@ -57,15 +56,14 @@ class About(Toplevel):
         self.wait_window(self)
 
     def _quitter(self):
-        """ ferme la fenêtre """
+        
         if self.master:
             self.master.focus_set()
         self.destroy()
 
     def _license(self):
-        """ affiche la licence dans une nouvelle fenêtre """
+        
         def close():
-            """ ferme la fenêtre """
             self.focus_set()
             fen.destroy()
 

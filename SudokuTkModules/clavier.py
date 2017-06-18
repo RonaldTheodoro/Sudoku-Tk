@@ -26,10 +26,8 @@ from tkinter.ttk import Style, Button
 from SudokuTkModules.constantes import LOG
 from numpy import array
 
-class Clavier(Toplevel):
-    """ Pavé numérique pour choisir un chiffre """
+class Clavier(Toplevel):    
     def __init__(self, parent, case, val_ou_pos, **options):
-        """ créer le Toplevel 'À propos de Bracelet Generator' """
         Toplevel.__init__(self, parent, **options)
         self.type = val_ou_pos # clavier pour rentrer une valeur ou une possibilité
         self.overrideredirect(True)
@@ -58,7 +56,6 @@ class Clavier(Toplevel):
         self.bind("<FocusOut>", self.focus_out)
 
     def focus_out(self, event):
-        """ quitte si la fenêtre n'est plus au premier plan """
         try:
             if not self.focus_get():
                 self.quitter()
@@ -67,7 +64,6 @@ class Clavier(Toplevel):
             self.quitter()
 
     def entre_nb(self, val):
-        """ commande de la touche val du clavier """
         i,j = self.case.get_i(), self.case.get_j()
 
         # données pour le log
@@ -98,7 +94,6 @@ class Clavier(Toplevel):
 
 
     def quitter(self):
-        """ ferme la fenêtre """
         if self.parent:
             self.parent.focus_set()
             self.parent.set_clavier(None)

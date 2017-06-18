@@ -26,8 +26,7 @@ import numpy as np
 from pickle import Pickler
 
 class Grille:
-    """ Grille de sudoku avec fonction de résolution """
-
+    
     def __init__(self, grille=np.ones((9,9,9), dtype=int)):
         self.grille = grille.copy()
         self.initiale = grille.copy() # grille initiale
@@ -56,7 +55,6 @@ class Grille:
         return self.initiale
 
     def nb_cases_remplies(self):
-        """ Renvoie le nombre de cases ne contenant qu'une possibilité """
         nb = 0
         for i in range(9):
             for j in range(9):
@@ -65,17 +63,11 @@ class Grille:
         return nb
 
     def ajoute(self,i,j,val):
-        """ met val dans la case (i,j) (et donc supprime les autres possibilités)
-            et simplifie """
         self.grille[i,j,:] = np.zeros(9, dtype=int)
         self.grille[i,j,val-1] = 1
         self.simplifie(i,j)
 
     def enleve(self,i,j):
-        """ Enlève le chiffre contenu dans la case (i,j) (qui ne contient qu'une
-            seule possibilité) dans la grille et la grille initiale et l'ajoute
-            dans les possibilités des autres cases de la ligne / colonne / bloc
-            (seulement si elles contiennent plusieurs possibilités) """
         val = self.grille[i,j,:].argmax()
         # réinitialisation des possibilités de la case
         self.grille[i,j,:] = np.ones(9, dtype=int)
@@ -117,15 +109,11 @@ class Grille:
         self.initiale[i,j,val-1] = 1
 
     def sauve(self,fichier):
-        """ enregistre la grille dans fichier """
         with open(fichier,"wb") as f:
             p = Pickler(f)
             p.dump(self)
 
     def get_sudoku(self):
-        """ renvoie un tableau 9x9 dont les cases contiennent 0 si elles
-            correspondent à une case contenant plusieurs possibilités,
-            le chiffre correspondant sinon. """
         tab = np.zeros((9,9), dtype=int)
         for i in range(9):
             for j in range(9):
@@ -134,7 +122,6 @@ class Grille:
         return tab
 
     def __repr__(self):
-        """ affiche seulement les cases ne contenant qu'un chiffre """
         ch = ""
         for i in range(9):
             for j in range(9):
@@ -150,7 +137,6 @@ class Grille:
         return ch
 
     def est_remplie(self):
-        """ renvoie True ssi la grille est remplie """
         for i in range(9):
             for j in range(9):
                 if self.grille[i,j,:].sum() != 1:
@@ -158,13 +144,9 @@ class Grille:
         return True
 
     def case_remplie(self,i,j):
-        """ Renvoie True ssi la case (i,j) ne contient qu'une valeur """
         return self.grille[i,j,:].sum() == 1
 
     def simplifie(self,i,j):
-        """ La case (i,j) ne doit contenir qu'une valeur.
-            Cette valeur est enlevée dans les autres cases de la ligne,
-            de la colonne et du bloc """
         val = self.grille[i,j,:].argmax()
         # ligne
         self.grille[i,:,val] = np.zeros(9, dtype=int)

@@ -25,7 +25,7 @@ from SudokuTkModules.constantes import STYLE
 from tkinter.ttk import Frame, Style, Label
 
 class Case(Frame):
-    """ case de la grille de sudoku """
+    
     def __init__(self, parent, i, j, **options):
         Frame.__init__(self, parent, **options)
         # grid layout
@@ -133,7 +133,6 @@ class Case(Frame):
         return nb
 
     def edit_possibilite(self, val):
-        """ Ajoute / Enlève  la possibilité val dans la case """
         i = (val - 1)//3
         j = (val - 1) % 3
         nb = 0
@@ -150,7 +149,6 @@ class Case(Frame):
 
 
     def efface_case(self):
-        """ Efface tous les labels de la case """
         for i in range(3):
             for j in range(3):
                 self.chiffres[i][j].configure(text=" ", font="Arial 9")
